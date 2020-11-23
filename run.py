@@ -64,23 +64,58 @@ def main():
 
     print("This is your password locker, What is your name please?")
     name = input()
-    
-    my_id=0
+
+    the_id =0
     entries = []
     print("\n" + "Welcome to password Locker")
     print("-"*40)
     while True:
-        print("Type:\n  cc to create new account\n  ss to sign in\n  ex to exit")
-        welcome_text = input().lower().strip()
-        if welcome_text == "cc":
+        print("Type:\n  cc to create a new account\n  ss to sign in to existing \n  ex to exit")
+        short_code = input().lower().strip()
+        if short_code == "cc":
             print("Create account to continue:"+"\n"+"-"*25 + " \n Enter Username:")
-            my_username = input("New Username: ")
+            name1 = input("New Username: ")
             print(" Enter password:")
-            my_password = input("New Password: ")
+            key1 = input("New Password: ")
 
             print("\n")
-            create_user(new_account(my_id,my_username,my_password,))
-            my_id+=1
-            print(f"User {my_username} has been created.\nSign in to continue")
+            create_user(new_account(the_id,name1,key1,))
+            the_id+=1
+            print(f"User {name1} has been created.\n Please sign in to continue")
             entries.append(0)
             print("-"*27)
+
+
+        elif short_code == "ss".lower():
+            print("Enter username and password to continue:")
+            print("-"*40)
+            login = input("Username: ")
+            key2 = input("Password: ")
+            get_result = authenticate(login,key2)
+            if get_result == 0:
+                print("\n")
+                print("Invalid username and/or password")
+                print("-"*27)
+            elif get_result!=0:
+                print("\n")
+                print(f"Welcome {get_result.user_name}! What would you like to do?")
+                while True:
+                    print("Type:\n  ad - Add your own Password\n  gn - generate random password\n vp - View Passwords\n  cp - copy password to clipboard\n  lo - Log Out")
+                    get_input = input().lower()
+                    if get_input == "gn":
+                        print("Add a website and create password for security:")
+                        print("Enter Website>")
+                        thewebsite = input()
+                        print("Enter Username>")
+                        thename = input()
+                        print("Input the length of the password")
+                        password_length = int(input("Password length> "))
+                        thewebkey = password_generator(password_length)
+                        my_identity = get_result.identify
+                        save_data(my_new_data(my_identity,entries[my_identity],thewebsite,thewebkey,thename))
+                        entries[my_identity]=entries[my_identity]+1
+                        print("\n Please wait...")
+                        time.sleep(2.0)
+                        print("\n")
+                        print(f"Your {thewebsite} is {thename} and password is {thewebkey}")
+                        print("-"*45)
