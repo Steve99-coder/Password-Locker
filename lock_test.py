@@ -108,11 +108,21 @@ class TestCredentials(unittest.TestCase):
 
     def test_create(self):
         '''
-        Testing if the new credential is saved into the list
+       Test to check if the new credentials is saved into the list
         '''
         self.new_user.create_account()
         self.assertEqual(len(Credentials.user_list),1)
     
+    def test_authenticate(self):
+        '''
+        Test to check if the authenticate function can sign in a user properly
+        '''
+        self.new_user.create_account()
+        test_account = Credentials(1,"Test","Password")
+        test_account.create_account()
+
+        found_user = Credentials.authenticate_account("Test","Password")
+        self.assertEqual(found_user.identify , test_account.identify)
 
 if __name__ == '__main__':
     unittest.main()
