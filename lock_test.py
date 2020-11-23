@@ -53,6 +53,18 @@ class TestUser(unittest.TestCase):
         data_found = User.display_data(1,1)
         self.assertEqual(data_found.website,test_data.website)
 
+
+    def test_data_exist(self):
+        '''
+        test_data_exist to test if the function for checking data works
+        '''
+        self.new_data.save_password()
+        test_data = User(1,1,"facebook.com","musky","tesla")
+        test_data.save_password()
+
+        data_exists = User.existing_data(1)
+        self.assertTrue(data_exists)
+    
 if __name__ == '__main__':
     unittest.main()
 
