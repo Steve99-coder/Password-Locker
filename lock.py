@@ -1,3 +1,5 @@
+import pyperclip
+
 class User:
     '''
     Class that generates new instances of users
@@ -37,6 +39,21 @@ class User:
         '''
         for data in cls.lock_list:
             if data.identity == number:
-                return True
+                return True 
         return False
+
+
+ class Credentials:
+    '''
+    Class that generates new instances of users
+    '''
+    user_list=[]
+
+    def __init__(self, identify, user_name, password):
+        '''
+        __init__ method that helps us define properties for our objects.
+        '''
+        self.identify = identify
+        self.user_name = user_name
+        self.password = password
    

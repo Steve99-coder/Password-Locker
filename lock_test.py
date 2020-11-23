@@ -1,5 +1,7 @@
 import unittest  # Importing the unittest module
 from lock import User
+import pyperclip
+
 
 
 class TestUser(unittest.TestCase):
@@ -65,6 +67,15 @@ class TestUser(unittest.TestCase):
         data_exists = User.existing_data(1)
         self.assertTrue(data_exists)
     
+    def test_copy_password(self):
+        '''
+        Test to confirm that we are copying the saved password from a found account
+        '''
+        self.new_data.save_password()
+        User.copy_password(1,1)
+
+        self.assertEqual(self.new_data.weblogin,pyperclip.paste())
+
 if __name__ == '__main__':
     unittest.main()
 
