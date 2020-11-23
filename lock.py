@@ -62,4 +62,14 @@ class Credentials:
         create_account method that creates credentials for the various users
         '''
         Credentials.user_list.append(self)
+
+    @classmethod
+    def authenticate_account(cls, name, lock):
+        '''
+        Method that checks if the username and password are correct
+        '''
+        for user in cls.user_list:
+            if user.user_name == name and user.password == lock:
+                return user
+        return 0
    
