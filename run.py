@@ -67,7 +67,7 @@ def main():
 
     the_id =0
     entries = []
-    print("\n" + "Welcome to password Locker")
+    print("\n" + f"Welcome to password Locker  {name}")
     print("-"*40)
     while True:
         print("Type:\n  cc to create a new account\n  ss to sign in to existing \n  ex to exit")
@@ -100,7 +100,7 @@ def main():
                 print("\n")
                 print(f"Welcome {results.user_name}! What would you like to do?")
                 while True:
-                    print("Type:\n  ad - Add your own Password\n  gn - generate random password\n vp - View Passwords\n  cp - copy password to clipboard\n  lo - Log Out")
+                    print("Type:\n  gn - generate random password\n vp - View Passwords \n  lo - Log Out")
                     short_code1 = input().lower()
                     if short_code1 == "gn":
                         print("Add a website and create password for security:")
