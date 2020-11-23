@@ -1,5 +1,5 @@
 import unittest  # Importing the unittest module
-from lock import User
+from lock import User,Credentials
 import pyperclip
 
 
@@ -72,9 +72,33 @@ class TestUser(unittest.TestCase):
         Test to confirm that we are copying the saved password from a found account
         '''
         self.new_data.save_password()
-        User.copy_password(1,1)
+        #User.copy_password(1,1)
 
         self.assertEqual(self.new_data.weblogin,pyperclip.paste())
+
+
+class TestCredentials(unittest.TestCase):
+    
+    '''
+    Test class that defines test cases for the credentials class behaviours.
+
+    Args:
+        unittest.TestCase: TestCase class that helps in creating test cases
+    '''
+    def setUp(self):
+        '''
+        Set up method to run before each test cases.
+        '''
+        self.new_user = Credentials(1,"Steve99","stevo")
+
+
+    def test_init(self):
+        '''
+        test_init test case to test if the object is initialized properly
+        '''
+        self.assertEqual(self.new_user.identify,1)
+        self.assertEqual(self.new_user.user_name,"Steve99")
+        self.assertEqual(self.new_user.password,"stevo")
 
 if __name__ == '__main__':
     unittest.main()
