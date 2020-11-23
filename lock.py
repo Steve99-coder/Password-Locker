@@ -43,7 +43,7 @@ class User:
         return False
 
 
- class Credentials:
+class Credentials:
     '''
     Class that generates new instances of users
     '''
@@ -56,4 +56,10 @@ class User:
         self.identify = identify
         self.user_name = user_name
         self.password = password
+
+    def create_account(self):
+        '''
+        create_account method that creates credentials for the various users
+        '''
+        Credentials.user_list.append(self)
    
