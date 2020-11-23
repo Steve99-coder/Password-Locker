@@ -91,18 +91,18 @@ def main():
             print("-"*40)
             login = input("Username: ")
             key2 = input("Password: ")
-            get_result = authenticate(login,key2)
-            if get_result == 0:
+            results = authenticate(login,key2)
+            if results == 0:
                 print("\n")
                 print("Invalid username and/or password")
                 print("-"*27)
-            elif get_result!=0:
+            elif results!=0:
                 print("\n")
-                print(f"Welcome {get_result.user_name}! What would you like to do?")
+                print(f"Welcome {results.user_name}! What would you like to do?")
                 while True:
                     print("Type:\n  ad - Add your own Password\n  gn - generate random password\n vp - View Passwords\n  cp - copy password to clipboard\n  lo - Log Out")
-                    get_input = input().lower()
-                    if get_input == "gn":
+                    short_code1 = input().lower()
+                    if short_code1 == "gn":
                         print("Add a website and create password for security:")
                         print("Enter Website>")
                         thewebsite = input()
@@ -111,7 +111,7 @@ def main():
                         print("Input the length of the password")
                         password_length = int(input("Password length> "))
                         thewebkey = password_generator(password_length)
-                        my_identity = get_result.identify
+                        my_identity = results.identify
                         save_data(my_new_data(my_identity,entries[my_identity],thewebsite,thewebkey,thename))
                         entries[my_identity]=entries[my_identity]+1
                         print("\n Please wait...")
@@ -119,3 +119,59 @@ def main():
                         print("\n")
                         print(f"Your {thewebsite} is {thename} and password is {thewebkey}")
                         print("-"*45)
+
+                    elif short_code1 == "vp":
+                        if data_existing(results.identify):
+                            store = entries[results.identify]
+                            print(f"You have {store} passwords:")
+                            print("\n")
+                            thedata=0
+                            while thedata < store:
+                                thepassword = display_data(results.identify,thedata)
+                                print(f"{thedata+1}. {thepassword.website} ---- {thepassword.web_key}")
+                                thedata+=1
+                            print("\nEnter a command to continue")
+                            print("-"*20)
+                        else:
+                            print("\nYou have no data.\nType ad to generate some passwords")
+                            print("-"*20)
+
+
+                    elif short_code1 == "lo":
+                        print("\n")
+                        print(f"Goodbye {results.user_name}!")
+                        print("-"*30)
+                        break
+                    elif short_code1 == "gn":
+                        print("Add a website and create password for security:")
+                        print("Enter Website:")
+                        thewebsite = input()
+                        print("Enter Username:")
+                        thename = input()
+                        print("Enter Password")
+                        thewebkey = input()
+                        my_identity = results.identify
+                        save_data(my_new_data(my_identity,entries[my_identity],thewebsite,thewebkey,thename))
+                        entries[my_identity]=entries[my_identity]+1
+                        print("\nWait...")
+                        time.sleep(1.5)
+                        print("\n")
+                        print(f"Your {thewebsite} username is {thename} and password is {thewebkey}")
+                        print("-"*45)
+                        
+                  
+                    else:
+                        print("Invalid entry. Enter command again")
+                        print("\n"+"-"*40)
+
+        elif short_code == "ex":
+            print("\n")
+            print(f"Logged off")
+            break
+        else:
+            print("Invalid entry. Enter command again")
+            print("\n"+"-"*40)
+
+
+if __name__ == '__main__':
+    main()
