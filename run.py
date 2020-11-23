@@ -59,3 +59,28 @@ def password_generator(count):
         pass_list.append(gen_password)
         round+=1
     return ''.join(pass_list)
+
+def main():
+
+    print("This is your password locker, What is your name please?")
+    name = input()
+    
+    my_id=0
+    entries = []
+    print("\n" + "Welcome to password Locker")
+    print("-"*40)
+    while True:
+        print("Type:\n  cc to create new account\n  ss to sign in\n  ex to exit")
+        welcome_text = input().lower().strip()
+        if welcome_text == "cc":
+            print("Create account to continue:"+"\n"+"-"*25 + " \n Enter Username:")
+            my_username = input("New Username: ")
+            print(" Enter password:")
+            my_password = input("New Password: ")
+
+            print("\n")
+            create_user(new_account(my_id,my_username,my_password,))
+            my_id+=1
+            print(f"User {my_username} has been created.\nSign in to continue")
+            entries.append(0)
+            print("-"*27)
